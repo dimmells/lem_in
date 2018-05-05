@@ -22,11 +22,8 @@ int			main(int ac, char **av)
 	int		size;
 	int		i;
 	int		j;
-	int		index_a;
 	int		**table;
-	char	**ways;
-	char	*way;
-	
+
 	farm = read_all();
 	
 	// printf("ants: %d\n", farm->ants);
@@ -37,41 +34,26 @@ int			main(int ac, char **av)
 	table = create_table(farm->room, size);
 	table = add_link_level(table, farm->start[0], &farm, 1);
 	link = farm->link;
-	while (link)
-	{
-		printf("%s %s\n", link->room_one, link->room_two);
-		link = link->next;
-	}
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			printf("%d ", table[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	ways = (char**)malloc(sizeof(char*) * size);
-	way = farm->end[0];
-	i = 0;
-	while (!ft_strequ(way, farm->start[0]))
-	{
-		ways[i] = ft_strdup(way);
-		index_a = get_index(farm->room, way);
-		way = find_min_level(table, farm->room, index_a, size);
-		i++;
-	}
-	ways[i] = ft_strdup(way);
-	ways[i + 1] = "\0";
-	i = 0;
-	while (ways[i])
-	{
-		printf("%s\n", ways[i]);
-		i++;
-	}
+	// while (link)
+	// {
+	// 	printf("%s %s\n", link->room_one, link->room_two);
+	// 	link = link->next;
+	// }
+	// i = 0;
+	// while (i < size)
+	// {
+	// 	j = 0;
+	// 	while (j < size)
+	// 	{
+	// 		printf("%d ", table[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
+	find_way(&farm, size, table);
+	print_way(farm);
 	free_all(&farm);
 	// system("leaks a.out");
+	return (0);
 }

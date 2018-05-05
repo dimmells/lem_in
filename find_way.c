@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_table.c                                     :+:      :+:    :+:   */
+/*   find_way.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmelnyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/04 13:50:24 by dmelnyk           #+#    #+#             */
-/*   Updated: 2018/05/04 13:50:26 by dmelnyk          ###   ########.fr       */
+/*   Created: 2018/05/05 13:46:56 by dmelnyk           #+#    #+#             */
+/*   Updated: 2018/05/05 13:46:57 by dmelnyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int				**create_table(t_rooms *room, int size)
+void		find_way(t_farm **farm, int size, int **table)
 {
-	int			j;
-	int			i;
-	int			**table;
+	char	*way;
+	int		index;
 
-	table = (int**)malloc(sizeof(int*) * (size));
-	i = 0;
-	while (i < size)
+	way = (*farm)->end[0];
+	while (!ft_strequ(way, (*farm)->start[0]))
 	{
-		table[i] = (int*)malloc(sizeof(int) * size);
-		j = 0;
-		while (j < size)
-		{
-			table[i][j] = 0;
-			j++;
-		}
-		i++;
+		if (!ft_strequ(way, (*farm)->end[0]))
+			add_way(&(*farm)->way, way);
+		index = get_index((*farm)->room, way);
+		way = find_min_level(table, (*farm)->room, index, size);
 	}
-	j = 1;
-	while (j < size)
-	{
-		table[0][j] = j;
-		table[j][0] = j;
-		j++;
-	}
-	return (table);
 }

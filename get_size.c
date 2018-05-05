@@ -20,8 +20,6 @@ int			get_size(t_rooms *room)
 	size = 1;
 	while (room)
 	{
-		printf("%s %s %s ", room->room[0], room->room[1], room->room[2]);
-		printf("%d\n", room->index);
 		size++;
 		room = room->next;
 	}

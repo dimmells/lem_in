@@ -26,12 +26,8 @@ int			**add_link_level(int **table, char *curr, t_farm **farm, int level)
 	{
 		if (ft_strequ(curr, link->room_one))
 		{
-			// printf("%s\n", curr);
 			index_a = get_index((*farm)->room, link->room_one);
 			index_b = get_index((*farm)->room, link->room_two);
-
-			// printf("index_a: %d\n", index_a);
-			// printf("index_b: %d\n", index_b);
 			if (table[index_a][index_b] > level || table[index_a][index_b] == 0)
 			{
 				table[index_a][index_b] = level;
@@ -41,12 +37,8 @@ int			**add_link_level(int **table, char *curr, t_farm **farm, int level)
 		}
 		if (ft_strequ(curr, link->room_two))
 		{
-			// printf("%s\n", curr);
 			index_a = get_index((*farm)->room, link->room_one);
 			index_b = get_index((*farm)->room, link->room_two);
-
-			// printf("index_a: %d\n", index_a);
-			// printf("index_b: %d\n", index_b);
 			if (table[index_a][index_b] > level || table[index_a][index_b] == 0)
 			{
 				table[index_a][index_b] = level;
