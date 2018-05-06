@@ -19,7 +19,7 @@ void	ft_str_ddel(char ***s)
 
 	if (!(*s))
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("ERROR\n", 2);
 		exit(1);
 	}
 	str = *s;

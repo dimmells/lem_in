@@ -62,23 +62,36 @@ void			print_way(t_farm *farm)
 
 	i = 0;
 	j = 0;
-	while (farm->ants > j)
+	if (farm->way == NULL)
 	{
-		way = farm->way;
-		while (way)
+		j = 1;
+		while (farm->ants >= j)
 		{
-			if (way->ant > 0)
-			{
-				j = shift_ant(&way, farm, j, i);
-				if (farm->ants == j)
-					break ;
-			}
-			if (way->next == NULL && way->ant == 0)
-			{
-				i = add_new_ant(&way, farm, i);
-			}
-			way = way->next;
+			print_ant_and_room(j, farm->end[0]);
+			ft_putstr("\n");
+			j++;
 		}
-		ft_putstr("\n");
+	}
+	else
+	{
+		while (farm->ants > j)
+		{
+			way = farm->way;
+			while (way)
+			{
+				if (way->ant > 0)
+				{
+					j = shift_ant(&way, farm, j, i);
+					if (farm->ants == j)
+						break ;
+				}
+				if (way->next == NULL && way->ant == 0)
+				{
+					i = add_new_ant(&way, farm, i);
+				}
+				way = way->next;
+			}
+			ft_putstr("\n");
+		}
 	}
 }

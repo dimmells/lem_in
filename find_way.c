@@ -16,7 +16,9 @@ void		find_way(t_farm **farm, int size, int **table)
 {
 	char	*way;
 	int		index;
+	int		count;
 
+	count = 0;
 	way = (*farm)->end[0];
 	while (!ft_strequ(way, (*farm)->start[0]))
 	{
@@ -24,5 +26,6 @@ void		find_way(t_farm **farm, int size, int **table)
 			add_way(&(*farm)->way, way);
 		index = get_index((*farm)->room, way);
 		way = find_min_level(table, (*farm)->room, index, size);
+		count++;
 	}
 }

@@ -63,8 +63,6 @@ static void		reding(t_farm **farm)
 
 	while ((*farm)->map)
 	{
-		// if (ft_strequ((*farm)->map->line, ""))
-		// 	break ;
 		if (ft_strlen((*farm)->map->line) > 0
 			&& (*farm)->map->line[0] != '#' && (*farm)->map->line[0] != 'L')
 		{
@@ -94,26 +92,13 @@ t_farm			*read_all(void)
 	farm = (t_farm*)malloc(sizeof(t_farm));
 	farm->map = read_map();
 	
-	int count = 0;
-	map = farm->map;
-	while (map != NULL)
-	{
-		if (ft_strequ(map->line, "##start") || ft_strequ(map->line, "##end"))
-			count++;
-		map = map->next;
-	}
-	if (count != 2)
-	{
-		ft_putendl_fd("ERROR", 2);
-		// system("leaks a.out");
-		exit(1);
-	}
-	map = farm->map;
-	while (map != NULL)
-	{
-		printf("%s\n", map->line);
-		map = map->next;
-	}
+	
+	// map = farm->map;
+	// while (map != NULL)
+	// {
+	// 	printf("%s\n", map->line);
+	// 	map = map->next;
+	// }
 
 
 
@@ -121,10 +106,33 @@ t_farm			*read_all(void)
 	farm->room = NULL;
 	farm->link = NULL;
 	farm->way = NULL;
+	farm->start = NULL;
+	farm->end = NULL;
 	farm->ants = ft_atoi(farm->map->line);
+	int ants = ft_strlen(farm->map->line);
+	if (farm->map->line[0] == '+')
+		ants--;
+	if (!(farm->ants <= 2147483647) || farm->ants < 1 || ants > 10)
+	{
+		ft_putendl_fd("ERROR", 2);
+		// system("leaks a.out");
+		exit(1);
+	}
 	farm->map = farm->map->next;
 	get_start_and_end(&farm);
+	if (farm->start == NULL || farm->end == NULL)
+	{
+		ft_putendl_fd("ERROR", 2);
+		// system("leaks a.out");
+		exit(1);
+	}
 	reding(&farm);
+	if (farm->room == NULL || farm->link == NULL)
+	{
+		ft_putendl_fd("ERROR", 2);
+		// system("leaks a.out");
+		exit(1);
+	}
 	farm->map = map;
 	return (farm);
 }

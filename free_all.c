@@ -70,5 +70,7 @@ static void		free_map(t_farm **farm)
 
 void			free_all(t_farm **farm)
 {
-	free_rooms(farm);
+	// free_rooms(farm);
+	// free_links(farm);
+	// free_map(farm);
 }
