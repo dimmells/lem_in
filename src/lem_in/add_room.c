@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_link.c                                         :+:      :+:    :+:   */
+/*   add_room.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmelnyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,30 @@
 
 #include "lem_in.h"
 
-void	add_link(t_links **links, char **link)
+void	add_room(t_rooms **rooms, char **room)
 {
-	t_links	*lst;
-	t_links	*new;
-	char	*room_one;
-	char	*room_two;
-	char	**split;
+	t_rooms	*lst;
+	t_rooms	*new;
+	int		j;
 
-	room_one = ft_strdup(link[0]);
-	room_two = ft_strdup(link[1]);
-	new = (t_links*)malloc(sizeof(t_links));
-	new->room_one = room_one;
-	new->room_two = room_two;
+	new = (t_rooms*)malloc(sizeof(t_rooms));
+	new->room = room;
 	new->next = NULL;
-	lst = *links;
+	lst = *rooms;
 	if (lst)
 	{
+		j = 2;
 		while (lst->next)
+		{
 			lst = lst->next;
+			j++;
+		}
+		new->index = j;
 		lst->next = new;
 	}
 	else
-		*links = new;
-	ft_str_ddel(&link);
+	{
+		new->index = 1;
+		*rooms = new;
+	}
 }

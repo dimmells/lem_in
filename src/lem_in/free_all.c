@@ -24,7 +24,7 @@ static void		free_rooms(t_farm **farm)
 		(*farm)->room->room = NULL;
 		free((*farm)->room);
 		(*farm)->room = NULL;
-		(*farm)->room = room;		
+		(*farm)->room = room;
 	}
 	free((*farm)->room);
 	(*farm)->room = NULL;
@@ -70,7 +70,4 @@ static void		free_map(t_farm **farm)
 
 void			free_all(t_farm **farm)
 {
-	// free_rooms(farm);
-	// free_links(farm);
-	// free_map(farm);
 }

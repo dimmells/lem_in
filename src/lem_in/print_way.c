@@ -54,13 +54,37 @@ static int		add_new_ant(t_way **way, t_farm *farm, int i)
 	return (i);
 }
 
-void			print_way(t_farm *farm)
+static void		if_way_exist(t_farm *farm, int j)
 {
 	t_way		*way;
 	int			i;
-	int			j;
 
 	i = 0;
+	while (farm->ants > j)
+	{
+		way = farm->way;
+		while (way)
+		{
+			if (way->ant > 0)
+			{
+				j = shift_ant(&way, farm, j, i);
+				if (farm->ants == j)
+					break ;
+			}
+			if (way->next == NULL && way->ant == 0)
+			{
+				i = add_new_ant(&way, farm, i);
+			}
+			way = way->next;
+		}
+		ft_putstr("\n");
+	}
+}
+
+void			print_way(t_farm *farm)
+{
+	int			j;
+
 	j = 0;
 	if (farm->way == NULL)
 	{
@@ -74,24 +98,6 @@ void			print_way(t_farm *farm)
 	}
 	else
 	{
-		while (farm->ants > j)
-		{
-			way = farm->way;
-			while (way)
-			{
-				if (way->ant > 0)
-				{
-					j = shift_ant(&way, farm, j, i);
-					if (farm->ants == j)
-						break ;
-				}
-				if (way->next == NULL && way->ant == 0)
-				{
-					i = add_new_ant(&way, farm, i);
-				}
-				way = way->next;
-			}
-			ft_putstr("\n");
-		}
+		if_way_exist(farm, j);
 	}
 }

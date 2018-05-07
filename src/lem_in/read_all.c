@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
 
 static int		ft_split_len(char **split)
 {
@@ -34,23 +33,11 @@ static void		get_start_and_end(t_farm **farm)
 		{
 			(*farm)->map = (*farm)->map->next;
 			(*farm)->start = ft_strsplit((*farm)->map->line, ' ');
-			if (ft_split_len((*farm)->start) != 3)
-			{
-				ft_putendl_fd("ERROR", 2);
-				// system("leaks a.out");
-				exit(1);
-			}
 		}
 		if (ft_strequ("##end", (*farm)->map->line))
 		{
 			(*farm)->map = (*farm)->map->next;
 			(*farm)->end = ft_strsplit((*farm)->map->line, ' ');
-			if (ft_split_len((*farm)->end) != 3)
-			{
-				ft_putendl_fd("ERROR", 2);
-				// system("leaks a.out");
-				exit(1);
-			}
 		}
 		(*farm)->map = (*farm)->map->next;
 	}
@@ -83,56 +70,42 @@ static void		reding(t_farm **farm)
 	}
 }
 
-t_farm			*read_all(void)
+t_farm			*init(void)
 {
 	t_farm		*farm;
-	t_map		*map;
-	int			i;
 
 	farm = (t_farm*)malloc(sizeof(t_farm));
 	farm->map = read_map();
-	
-	
-	// map = farm->map;
-	// while (map != NULL)
-	// {
-	// 	printf("%s\n", map->line);
-	// 	map = map->next;
-	// }
-
-
-
-	map = farm->map;
 	farm->room = NULL;
 	farm->link = NULL;
 	farm->way = NULL;
 	farm->start = NULL;
 	farm->end = NULL;
 	farm->ants = ft_atoi(farm->map->line);
-	int ants = ft_strlen(farm->map->line);
+	return (farm);
+}
+
+t_farm			*read_all(void)
+{
+	t_farm		*farm;
+	t_map		*map;
+	int			i;
+	int			ants;
+
+	farm = init();
+	map = farm->map;
+	ants = ft_strlen(farm->map->line);
 	if (farm->map->line[0] == '+')
 		ants--;
 	if (!(farm->ants <= 2147483647) || farm->ants < 1 || ants > 10)
-	{
-		ft_putendl_fd("ERROR", 2);
-		// system("leaks a.out");
-		exit(1);
-	}
+		ft_exit();
 	farm->map = farm->map->next;
 	get_start_and_end(&farm);
 	if (farm->start == NULL || farm->end == NULL)
-	{
-		ft_putendl_fd("ERROR", 2);
-		// system("leaks a.out");
-		exit(1);
-	}
+		ft_exit();
 	reding(&farm);
 	if (farm->room == NULL || farm->link == NULL)
-	{
-		ft_putendl_fd("ERROR", 2);
-		// system("leaks a.out");
-		exit(1);
-	}
+		ft_exit();
 	farm->map = map;
 	return (farm);
 }

@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_room.c                                         :+:      :+:    :+:   */
+/*   add_way.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmelnyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/01 12:50:10 by dmelnyk           #+#    #+#             */
-/*   Updated: 2018/05/01 12:50:25 by dmelnyk          ###   ########.fr       */
+/*   Created: 2018/05/05 11:42:20 by dmelnyk           #+#    #+#             */
+/*   Updated: 2018/05/05 11:42:21 by dmelnyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	add_room(t_rooms **rooms, char **room)
+void		add_way(t_way **way, char *room)
 {
-	t_rooms	*lst;
-	t_rooms	*new;
-	int		j;
+	t_way	*new;
+	t_way	*lst;
 
-	new = (t_rooms*)malloc(sizeof(t_rooms));
+	new = (t_way*)malloc(sizeof(t_way));
 	new->room = room;
+	new->ant = 0;
 	new->next = NULL;
-	lst = *rooms;
+	new->prev = NULL;
+	lst = *way;
 	if (lst)
 	{
-		j = 2;
 		while (lst->next)
-		{
 			lst = lst->next;
-			j++;
-		}
-		new->index = j;
+		new->prev = lst;
 		lst->next = new;
 	}
 	else
-	{
-		new->index = 1;
-		*rooms = new;
-	}
+		*way = new;
 }
