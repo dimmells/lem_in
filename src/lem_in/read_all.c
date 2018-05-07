@@ -89,7 +89,6 @@ t_farm			*read_all(void)
 {
 	t_farm		*farm;
 	t_map		*map;
-	int			i;
 	int			ants;
 
 	farm = init();

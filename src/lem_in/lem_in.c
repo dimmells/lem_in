@@ -12,20 +12,26 @@
 
 #include "lem_in.h"
 
-int			main(int ac, char **av)
+int			main(void)
 {
 	t_farm	*farm;
+	t_map	*map;
 	int		size;
 	int		**table;
 
 	farm = read_all();
 	size = get_size(farm->room);
-	table = create_table(farm->room, size);
+	table = create_table(size);
 	table = add_link_level(table, farm->start[0], &farm, 1);
 	check(table, size, farm);
 	find_way(&farm, size, table);
+	map = farm->map;
+	while (map != NULL)
+	{
+		ft_putendl(map->line);
+		map = map->next;
+	}
+	ft_putstr("\n");
 	print_way(farm);
-	free_all(&farm);
-	system("leaks a.out");
 	return (0);
 }

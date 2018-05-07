@@ -51,7 +51,7 @@ static void	check_is_way_exist(int **table, int size, t_farm *farm)
 		ft_exit();
 }
 
-static void	check_link(int **table, t_farm *farm)
+static void	check_link(t_farm *farm)
 {
 	t_links	*link;
 
@@ -71,7 +71,7 @@ void		check(int **table, int size, t_farm *farm)
 	t_rooms	*rd;
 
 	check_is_way_exist(table, size, farm);
-	check_link(table, farm);
+	check_link(farm);
 	room = farm->room;
 	while (room)
 	{

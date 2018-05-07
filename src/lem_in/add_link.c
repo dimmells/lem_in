@@ -18,7 +18,6 @@ void	add_link(t_links **links, char **link)
 	t_links	*new;
 	char	*room_one;
 	char	*room_two;
-	char	**split;
 
 	room_one = ft_strdup(link[0]);
 	room_two = ft_strdup(link[1]);

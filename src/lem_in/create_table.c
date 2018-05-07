@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int				**create_table(t_rooms *room, int size)
+int				**create_table(int size)
 {
 	int			j;
 	int			i;
